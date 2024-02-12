@@ -59,35 +59,32 @@
         RandFilMatrx(matrix2, n);
 
         int p = 0;
-        //for (int k = 0; k < 6; k++)
-        //{
         for (int j = 2; j < m + 1; j++)
+        {
+            RandFilMatrx(matrix1, n);
+            RandFilMatrx(matrix2, n);
+            DateTime tth1, tth2;
+            Thread[] threads = new Thread[j];
+            p = n / j;
+            tth1 = DateTime.Now;
+            for (int i = 0; i < j; i++)
             {
-                RandFilMatrx(matrix1, n);
-                RandFilMatrx(matrix2, n);   
-                DateTime tth1, tth2;
-                Thread[] threads = new Thread[j];
-                p = n / j;
-                tth1 = DateTime.Now;
-                for (int i = 0; i < j; i++)
-                {
-                    int stTh = i * p;
-                    int enTh = (i == j - 1) ? n : (i + 1) * p;
-                    threads[i] = new Thread(() =>
-                        SumMatrixParall(matrix1, matrix2, stTh, enTh, n)
+                int stTh = i * p;
+                int enTh = (i == j - 1) ? n : (i + 1) * p;
+                threads[i] = new Thread(() =>
+                    SumMatrixParall(matrix1, matrix2, stTh, enTh, n)
 
-                        );
-                    threads[i].Start();
-                }
-                foreach (Thread thread in threads)
-                {
-                    thread.Join();
-                }
-                tth2 = DateTime.Now;
-                TimeSpan tths = tth2 - tth1;
-                Console.WriteLine("Time m = " + j + " : " + tths.TotalMilliseconds);
+                    );
+                threads[i].Start();
             }
+            foreach (Thread thread in threads)
+            {
+                thread.Join();
+            }
+            tth2 = DateTime.Now;
+            TimeSpan tths = tth2 - tth1;
+            Console.WriteLine("Time m = " + j + " : " + tths.TotalMilliseconds);
         }
-    //}
+    }
 
 }
