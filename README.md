@@ -1,1 +1,4 @@
-"# Parallel-Threads" 
+# Parallel-Threads
+The task was completed using threads.
+
+Two methods of processing elements of two-dimensional arrays (matrices) are implemented: sequential and parallel. In the sequential method, the array elements are processed in one thread, in parallel – in m threads (the parameter m must be passed to the processing function). In this case, the array is divided into m parts, and each part is processed in a separate thread. The processing operation is the calculation of some complex function from the sum of two matrices of the same size with elements of the float type and writing the sum value to the first matrix. Matrices with the maximum possible size are filled in before calling the processing function with random numbers. The execution time of the processing function is measured by finding the difference between the start time and the end time of processing. The test results show the dependence of the processing operation execution time on the parameter m (measurements for m in the range 1-8).
